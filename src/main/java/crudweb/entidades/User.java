@@ -32,9 +32,10 @@ public class User {
 	}
 	
 	
-	User(String nome, int idade){
+	public User(String nome, int idade, String sexo){
 		this.nome = nome;
 		this.idade = idade;
+		this.sexo = sexo;
 	}
 	
 	
