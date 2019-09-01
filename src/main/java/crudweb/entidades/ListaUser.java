@@ -3,9 +3,9 @@ package crudweb.entidades;
 import java.util.ArrayList;
 
 public class ListaUser {
-	private ArrayList usuarios;
+	private ArrayList<User> usuarios;
 
-	public ArrayList getUsuarios() {
+	public ArrayList<User> getUsuarios() {
 		return usuarios;
 	}
 

@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import crudweb.entidades.ListaUser;
 import crudweb.entidades.User;
 
-@WebServlet(name = "CadastroServlet", urlPatterns = { "/cadastro" }, loadOnStartup = 1)
+@WebServlet(name = "CadastroServlet", urlPatterns = { "/cadastro.html" }, loadOnStartup = 1)
 public class CadastroServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -2459069235625043917L;
 	
 	User usuarioNovo;
-	//ListaUser listaUsuarios ;
+	public ListaUser listaUsuarios = new ListaUser();
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,9 +29,14 @@ public class CadastroServlet extends HttpServlet {
 		
 		usuarioNovo = new User(name, idade, sexo);
 		
-		//listaUsuarios = new ListaUser();
 		
-		//listaUsuarios.setUsuarios(usuarioNovo);		
+		
+		listaUsuarios.setUsuarios(usuarioNovo);	
+		
+		request.setAttribute("Usuarios", usuarioNovo);
+		
+		request.getRequestDispatcher("usuarios.jsp")
+		.forward(request, response);
 		
 	}
 }

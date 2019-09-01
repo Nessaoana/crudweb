@@ -36,7 +36,5 @@ public class User {
 		this.nome = nome;
 		this.idade = idade;
 		this.sexo = sexo;
-	}
-	
-	
+	}	
 }
