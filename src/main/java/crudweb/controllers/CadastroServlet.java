@@ -2,10 +2,12 @@ package crudweb.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
  
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,12 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import crudweb.entidades.ListaUser;
 import crudweb.entidades.User;
 
-public class CadastroController {
 
-	public class ControllerServlet extends HttpServlet {
+@WebServlet("/")
+	public class CadastroServlet extends HttpServlet {
 	    private static final long serialVersionUID = 1L;
-	    private ListaUser ls;
-
+	    @SuppressWarnings("unchecked")
+		private ArrayList<User> ls = new ArrayList();
+	    ListaUser lsa = new ListaUser();
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
 	        doGet(request, response);
@@ -36,12 +39,14 @@ public class CadastroController {
 	            case "/insert":
 	                insertUser(request, response);
 	                break;
+	                
+	            case "/ver":
+	                seeUser(request, response);
+	                break;
 	            /*case "/delete":
 	                deleteBook(request, response);
 	                break;
-	            case "/edit":
-	                showEditForm(request, response);
-	                break;
+
 	            case "/update":
 	                updateBook(request, response);
 	                break;*/
@@ -59,26 +64,29 @@ public class CadastroController {
 	    	
 	    	
 			String name = request.getParameter("nome");
+			String email = request.getParameter("email");
 			int idade = Integer.parseInt(request.getParameter("idade"));
-			String sexo = request.getParameter("sexo");
-			
-			
-			User usuarioNovo = new User(name, idade, sexo);
-			
-			ls.setUsuarios(usuarioNovo);	
-			
-			request.setAttribute("Usuarios", usuarioNovo);
-			
-			request.getRequestDispatcher("usuarios.jsp").forward(request, response);
 
+			User usuarioNovo = new User(name, email, idade);
+			
+			
+			ls.add(usuarioNovo);	
+			
+			System.out.println(ls);
+			
 	        response.sendRedirect("list");
+
 	    }
 	    
 	    private void listUser(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
-	        List<User> listUser = ls.getUsuarios();
-	        request.setAttribute("listBook", listUser);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
+
+	    	lsa.setUsuarios(ls);
+	    	System.out.println(lsa.getUsuarios().toString());
+	    	
+	    	
+	        request.setAttribute("listUser", ls);
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("usuarios.jsp");
 	        dispatcher.forward(request, response);
 	    }
 	    
@@ -86,22 +94,29 @@ public class CadastroController {
 	 
 	    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("usuarios.jsp");
 	        dispatcher.forward(request, response);
+	    }
+	    
+	    
+	    
+	    private void seeUser(HttpServletRequest request, HttpServletResponse response)
+	            throws SQLException, ServletException, IOException {
+	    	
+	        String nome = (request.getParameter("nome"));
+	        ListaUser.getUsuario(nome);
+	        
+	        
+	        String name = request.getParameter("nome");
+			String email = request.getParameter("email");
+			int idade = Integer.parseInt(request.getParameter("idade"));
+			
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("usuario.jsp");
+	        request.setAttribute("usuario", nome);
+	        dispatcher.forward(request, response);
+	 
 	    }
 	  /*
-	    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-	            throws SQLException, ServletException, IOException {
-	        int id = Integer.parseInt(request.getParameter("id"));
-	        Book existingBook = bookDAO.getBook(id);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("BookForm.jsp");
-	        request.setAttribute("book", existingBook);
-	        dispatcher.forward(request, response);
-	 
-	    }
-	 
-
-	 
 	    private void updateBook(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException {
 	        int id = Integer.parseInt(request.getParameter("id"));
@@ -124,4 +139,3 @@ public class CadastroController {
 	 
 	    }*/
 	}
-}

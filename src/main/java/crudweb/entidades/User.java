@@ -2,8 +2,9 @@ package crudweb.entidades;
 
 public class User {
 	private String nome;
+	private String email;
 	private int idade;
-	private String sexo;
+
 	
 	
 	public String getNome() {
@@ -23,18 +24,22 @@ public class User {
 		this.idade = idade;
 	}
 
-	public String getSexo() {
-		return this.sexo;
+	public String getEmail() {
+		return this.email;
 	}
 	
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
-	public User(String nome, int idade, String sexo){
+	public User(String nome, String email, int idade){
 		this.nome = nome;
+		this.email = email;
 		this.idade = idade;
-		this.sexo = sexo;
+
 	}	
+	
+	public User () {}
+	
 }

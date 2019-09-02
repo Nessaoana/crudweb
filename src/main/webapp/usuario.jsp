@@ -15,7 +15,7 @@
 			<form action="insert" method="post">
 		</c:if>
 		<table border="1" cellpadding="5">
-			<h2>Adicionar novo Usu·rio</h2>
+			<h2>Adicionar novo Usu√°rio</h2>
 			<tr>
 				<th>Nome:</th>
 				<td><input type="text" name="nome" size="45"
