@@ -31,7 +31,7 @@ public class ListaUser {
 			if(u.getNome().equalsIgnoreCase(nome)) {
 				user = u;
 			} else {
-				System.out.println("Usu·rio n„o encontrado");
+				System.out.println("Usu√°rio n√£o encontrado");
 			}
 		}
 		return user;
