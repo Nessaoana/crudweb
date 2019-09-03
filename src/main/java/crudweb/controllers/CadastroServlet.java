@@ -30,7 +30,7 @@ public class CadastroServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getServletPath();
+		String action = request.getParameter("action");
 
 		switch (action) {
 		case "/new":
@@ -66,7 +66,7 @@ public class CadastroServlet extends HttpServlet {
 
 		ls.add(usuarioNovo);
 
-		System.out.println(ls);
+		//System.out.println(ls);
 
 		response.sendRedirect("list");
 
@@ -76,7 +76,7 @@ public class CadastroServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		lsa.setUsuarios(ls);
-		System.out.println(lsa.getUsuarios().toString());
+		//System.out.println(lsa.getUsuarios().toString());
 
 		request.setAttribute("listUser", ls);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("usuarios.jsp");
@@ -91,10 +91,12 @@ public class CadastroServlet extends HttpServlet {
 
 	private void seeUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		lsa.setUsuarios(ls);
 		String nome = (request.getParameter("id"));
 		System.out.println(nome);
-		User usuario_pesquisa = ListaUser.getUsuario(nome);
+		User usuario_pesquisa = null;
+		usuario_pesquisa = lsa.getUsuario(nome);
 
 		String email = usuario_pesquisa.getEmail();
 		int idade = usuario_pesquisa.getIdade();

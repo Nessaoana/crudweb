@@ -24,7 +24,7 @@ public class ListaUser {
 	public void addUser(User usuario) {
 		this.usuarios.add(usuario);
 	}
-	public static User getUsuario(String nome){
+	public User getUsuario(String nome){
 		User user = null;
 		
 		for(User u : usuarios) {

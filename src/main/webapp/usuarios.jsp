@@ -45,7 +45,7 @@
 					</td>
 					<td>
 						<a href="ver?id=<c:out value='${user.nome}' />">Ver</a>
-						&nbsp;&nbsp;&nbsp;&nbsp;
+						
 					</td>
 				</tr>
 			</c:forEach>
